@@ -1,0 +1,12 @@
+@startuml
+participant Participant [
+    =Title
+    ----
+    ""SubTile""
+]
+Participant <- Participant: This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+Participant -> "Bob()": Hello
+"Bob()" -> "This is very \n long" as Long
+Long --> "Bob()": ok
+Long -> Long : This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+@enduml

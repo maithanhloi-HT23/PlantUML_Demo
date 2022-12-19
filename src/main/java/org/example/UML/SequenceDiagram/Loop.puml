@@ -1,0 +1,10 @@
+@startuml
+participant Client
+participant Server
+
+Client ->> Server: report
+loop until reporting Client ends
+Client -->> Server: report
+end loop
+
+@enduml

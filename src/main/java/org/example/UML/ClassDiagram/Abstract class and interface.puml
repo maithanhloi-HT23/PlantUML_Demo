@@ -1,0 +1,36 @@
+@startuml
+abstract class  AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+    Object[] elementData
+    size()
+}
+
+enum TimeUint {
+    DAYS
+    HOURS
+    MINUTES
+}
+
+annotation SupperssWarnings
+annotation Annotation {
+    annotation with members
+    String foo()
+    string bar()
+}
+'Using non-letters
+class "This is my class" as class1
+class class2 as "It works this way too"
+
+class2 *-- "foo/dummy" : use
+@enduml

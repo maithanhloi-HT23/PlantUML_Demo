@@ -1,0 +1,14 @@
+@startuml
+Bod ->x Alice : Delete message
+Bod -> Alice : Synchronous message
+Bod ->> Alice : Asynchronous message
+Bod -\ Alice
+Bod \\- Alice
+Bod //-- Alice
+
+Bod ->o Alice
+Bod o//-- Alice
+
+Bod <-> Alice
+Bod <->o Alice
+@enduml

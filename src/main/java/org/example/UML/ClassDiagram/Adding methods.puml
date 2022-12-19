@@ -1,0 +1,32 @@
+@startuml
+Object <|-- ArrayList
+
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+
+class Dummy {
+    String data
+    {field} A field (despite parentheses)
+    void methods()
+    {method} Soe method
+}
+
+class Flight {
+    flightNumber : Integer
+    departureTime : Date
+}
+'Defining visibility
+class temp {
+-field1
+#field1
+~method1()
++method2()
+}
+
+'Abstract and Static
+class temp1 {
+    {static} String id
+    {abstract} void methods()
+}
+@enduml

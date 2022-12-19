@@ -1,0 +1,13 @@
+@startuml
+participant Client
+participant Server
+
+Client -> Server: Authentication Request
+alt successful case
+Server -> Client: Authentication Accepted
+else some kind of failure
+Server -> Client: Authentication Failure
+else Another type of failure
+Server -> Client: Please repeat
+end
+@enduml

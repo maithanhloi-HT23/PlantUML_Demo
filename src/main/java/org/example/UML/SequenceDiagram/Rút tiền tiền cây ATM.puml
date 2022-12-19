@@ -1,0 +1,52 @@
+@startuml
+actor User as user
+boundary "Cây ATM" as atm_machine
+database "Server Ngân hàng" as bank_server
+
+user -> atm_machine : "Nhập thẻ"
+activate user
+activate atm_machine
+user <<-- atm_machine: Yêu cầu mã PIN
+user -> atm_machine: Nhập mã PIN
+
+atm_machine -> bank_server: Kiểm tra mã PIN
+activate bank_server
+atm_machine <<-- bank_server: Xác nhận mã PIN
+deactivate
+
+atm_machine -->> user: Hiện thị danh sách lựa chọn
+user -> atm_machine: Nhập lựa chọn
+
+alt Lựa chọn kiểm tra số dư
+    atm_machine -> bank_server: Lấy số dư
+    activate bank_server
+    atm_machine <<-- bank_server: Trả về số dư
+    deactivate
+    atm_machine -->> user: Hiện thị số dư
+else Lựa chọn rút tiền
+    atm_machine -->> user: Yêu cầu nhập số tiền
+    user -> atm_machine: Nhập số tiền
+    atm_machine -> bank_server: Kiểm tra số dư
+    activate bank_server
+    bank_server -->> atm_machine: Trả về số dư
+    deactivate
+    alt Số dư > Số tiền muốn rút
+        atm_machine -> bank_server: Cập nhật số dư
+        activate bank_server
+        bank_server -->> atm_machine: Số dư đã được cập nhật
+        deactivate
+        atm_machine -->> user: Thông báo "Hãy nhận tiền"
+        atm_machine -->> user: In hóa đơn
+        user -> atm_machine: Nhận tiền và hóa đơn
+    else Số dư < Số tiền muốn rút
+        atm_machine -->> user: Thông báo "Số dư không đủ để giao dịch"
+    end
+else Hủy
+    atm_machine -->> user: Thông báo "Giao dịch đã bị hủy"
+end
+atm_machine -->> user: Trả thẻ
+user -> atm_machine: Nhận lại thẻ
+user <<-- atm_machine: hiện thị cảm ơn
+destroy atm_machine
+destroy user
+@enduml

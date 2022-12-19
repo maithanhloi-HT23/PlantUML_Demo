@@ -1,0 +1,14 @@
+@startuml
+
+participant Client
+participant Server
+
+group Working
+Client -> Server: DoWork
+activate Client
+Server --> Client: WorkDone
+destroy Server
+deactivate Client
+end
+
+@enduml
